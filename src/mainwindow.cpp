@@ -62,10 +62,10 @@ void MainWindow::setupUI()
 
 void MainWindow::setupCharts()
 {
-    // График процесса
-    QChart* processChart = new QChart();
-    processChart->setTitle("Процесс и Уставка");
-    processChart->setAnimationOptions(QChart::SeriesAnimations);
+    // Создаем QChart для графика процесса
+    m_processChart = new QChart();
+    m_processChart->setTitle("Процесс и Уставка");
+    m_processChart->setAnimationOptions(QChart::SeriesAnimations);
     
     m_setpointSeries = new QLineSeries();
     m_setpointSeries->setName("Уставка");
@@ -75,8 +75,8 @@ void MainWindow::setupCharts()
     m_processValueSeries->setName("Процесс");
     m_processValueSeries->setColor(Qt::blue);
     
-    processChart->addSeries(m_setpointSeries);
-    processChart->addSeries(m_processValueSeries);
+    m_processChart->addSeries(m_setpointSeries);
+    m_processChart->addSeries(m_processValueSeries);
     
     m_axisX = new QValueAxis();
     m_axisX->setTitleText("Время (с)");
@@ -86,29 +86,41 @@ void MainWindow::setupCharts()
     m_axisY->setTitleText("Значение");
     m_axisY->setRange(0, 100);
     
-    processChart->addAxis(m_axisX, Qt::AlignBottom);
-    processChart->addAxis(m_axisY, Qt::AlignLeft);
+    m_processChart->addAxis(m_axisX, Qt::AlignBottom);
+    m_processChart->addAxis(m_axisY, Qt::AlignLeft);
     
     m_setpointSeries->attachAxis(m_axisX);
     m_setpointSeries->attachAxis(m_axisY);
     m_processValueSeries->attachAxis(m_axisX);
     m_processValueSeries->attachAxis(m_axisY);
     
-    processChart->legend()->setVisible(true);
-    processChart->legend()->setAlignment(Qt::AlignBottom);
+    m_processChart->legend()->setVisible(true);
+    m_processChart->legend()->setAlignment(Qt::AlignBottom);
     
-    ui->processChartView->setChart(processChart);
+    // Создаем QChartView программно и добавляем в layout
+    m_processChartView = new QChartView(m_processChart);
+    m_processChartView->setRenderHint(QPainter::Antialiasing);
+    
+    // Находим существующий виджет и заменяем его
+    QWidget* placeholder = ui->processChartView;
+    QLayout* parentLayout = placeholder->parentWidget()->layout();
+    if (parentLayout) {
+        int index = parentLayout->indexOf(placeholder);
+        placeholder->hide();
+        placeholder->deleteLater();
+        parentLayout->addWidget(m_processChartView);
+    }
     
     // График управления
-    QChart* controlChart = new QChart();
-    controlChart->setTitle("Управляющее Воздействие");
-    controlChart->setAnimationOptions(QChart::SeriesAnimations);
+    m_controlChart = new QChart();
+    m_controlChart->setTitle("Управляющее Воздействие");
+    m_controlChart->setAnimationOptions(QChart::SeriesAnimations);
     
     m_controllerOutputSeries = new QLineSeries();
     m_controllerOutputSeries->setName("Выход ПИД");
     m_controllerOutputSeries->setColor(Qt::green);
     
-    controlChart->addSeries(m_controllerOutputSeries);
+    m_controlChart->addSeries(m_controllerOutputSeries);
     
     QValueAxis* axisX2 = new QValueAxis();
     axisX2->setTitleText("Время (с)");
@@ -118,16 +130,26 @@ void MainWindow::setupCharts()
     axisY2->setTitleText("Выход (%)");
     axisY2->setRange(0, 100);
     
-    controlChart->addAxis(axisX2, Qt::AlignBottom);
-    controlChart->addAxis(axisY2, Qt::AlignLeft);
+    m_controlChart->addAxis(axisX2, Qt::AlignBottom);
+    m_controlChart->addAxis(axisY2, Qt::AlignLeft);
     
     m_controllerOutputSeries->attachAxis(axisX2);
     m_controllerOutputSeries->attachAxis(axisY2);
     
-    controlChart->legend()->setVisible(true);
-    controlChart->legend()->setAlignment(Qt::AlignBottom);
+    m_controlChart->legend()->setVisible(true);
+    m_controlChart->legend()->setAlignment(Qt::AlignBottom);
     
-    ui->controlChartView->setChart(controlChart);
+    m_controlChartView = new QChartView(m_controlChart);
+    m_controlChartView->setRenderHint(QPainter::Antialiasing);
+    
+    placeholder = ui->controlChartView;
+    parentLayout = placeholder->parentWidget()->layout();
+    if (parentLayout) {
+        int index = parentLayout->indexOf(placeholder);
+        placeholder->hide();
+        placeholder->deleteLater();
+        parentLayout->addWidget(m_controlChartView);
+    }
 }
 
 void MainWindow::setupConnections()
