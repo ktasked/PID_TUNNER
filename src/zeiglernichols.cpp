@@ -34,9 +34,9 @@ bool ZieglerNichols::isApplicable(const ProcessModel::ModelParameters& params) c
     return true;
 }
 
-TuningResult ZieglerNichols::tune(const ProcessModel::ModelParameters& params)
+TuningMethod::TuningResult ZieglerNichols::tune(const ProcessModel::ModelParameters& params)
 {
-    TuningResult result;
+    TuningMethod::TuningResult result;
     
     switch (m_variant) {
     case Variant::ProcessReactionCurve:
@@ -51,9 +51,9 @@ TuningResult ZieglerNichols::tune(const ProcessModel::ModelParameters& params)
     return result;
 }
 
-TuningResult ZieglerNichols::tuneByReactionCurve(const ProcessModel::ModelParameters& params)
+TuningMethod::TuningResult ZieglerNichols::tuneByReactionCurve(const ProcessModel::ModelParameters& params)
 {
-    TuningResult result;
+    TuningMethod::TuningResult result;
     
     double K = params.gain;
     double T = params.timeConstant1;
