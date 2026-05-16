@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1400</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PID AutoTuner - Нефтегазовое применение</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QMainWindow {
+    background-color: #f5f5f5;
+}
+
+QGroupBox {
+    font-weight: bold;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    margin-top: 12px;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 15px;
+    padding: 0 8px;
+    color: #2c3e50;
+    background-color: #3498db;
+    color: white;
+}
+
+QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    min-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #1abc9c;
+}
+
+QPushButton:disabled {
+    background-color: #bdc3c7;
+}
+
+QLineEdit, QDoubleSpinBox, QSpinBox {
+    border: 2px solid #bdc3c7;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: white;
+}
+
+QLineEdit:focus, QDoubleSpinBox:focus, QSpinBox:focus {
+    border-color: #3498db;
+}
+
+QComboBox {
+    border: 2px solid #bdc3c7;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: white;
+    min-width: 150px;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 20px;
+}
+
+QLabel {
+    color: #2c3e50;
+}
+
+QTabWidget::pane {
+    border: 2px solid #3498db;
+    border-radius: 4px;
+}
+
+QTabBar::tab {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    padding: 8px 16px;
+    border: 2px solid #bdc3c7;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: white;
+    border-color: #3498db;
+    border-bottom: 2px solid white;
+}
+
+QProgressBar {
+    border: 2px solid #bdc3c7;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #ecf0f1;
+}
+
+QProgressBar::chunk {
+    background-color: #3498db;
+}
+
+QTextEdit {
+    border: 2px solid #bdc3c7;
+    border-radius: 4px;
+    background-color: white;
+    font-family: 'Consolas', monospace;
+}
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="lblTitle">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>🛢️ Система Автоматической Настройки ПИД-Регулятора</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #2c3e50; background-color: #3498db; padding: 10px; border-radius: 8px;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabProcess">
+       <attribute name="title">
+        <string>📊 Параметры Процесса</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Ввод Параметров Модели</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblProcessType">
+             <property name="text">
+              <string>Тип процесса:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="cmbProcessType">
+             <item>
+              <property name="text">
+               <string>FOPDT (Первый порядок + задержка)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Первый порядок</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Второй порядок</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Интегрирующее звено</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Теплообменник</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Трубопровод</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblGain">
+             <property name="text">
+              <string>Коэфф. усиления (K):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="spinGain">
+             <property name="decimals">
+              <number>3</number>
+             </property>
+             <property name="minimum">
+              <double>0.001</double>
+             </property>
+             <property name="maximum">
+              <double>1000.0</double>
+             </property>
+             <property name="value">
+              <double>1.0</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lblTimeConstant">
+             <property name="text">
+              <string>Постоянная времени (T):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="spinTimeConstant">
+             <property name="decimals">
+              <number>2</number>
+             </property>
+             <property name="minimum">
+              <double>0.01</double>
+             </property>
+             <property name="maximum">
+              <double>1000.0</double>
+             </property>
+             <property name="value">
+              <double>10.0</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="lblDeadTime">
+             <property name="text">
+              <string>Время задержки (L):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="spinDeadTime">
+             <property name="decimals">
+              <number>2</number>
+             </property>
+             <property name="minimum">
+              <double>0.0</double>
+             </property>
+             <property name="maximum">
+              <double>500.0</double>
+             </property>
+             <property name="value">
+              <double>2.0</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="lblDisturbance">
+             <property name="text">
+              <string>Возмущение:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QDoubleSpinBox" name="spinDisturbance">
+             <property name="decimals">
+              <number>2</number>
+             </property>
+             <property name="minimum">
+              <double>-100.0</double>
+             </property>
+             <property name="maximum">
+              <double>100.0</double>
+             </property>
+             <property name="value">
+              <double>0.0</double>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="lblNoise">
+             <property name="text">
+              <string>Уровень шума:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QDoubleSpinBox" name="spinNoise">
+             <property name="decimals">
+              <number>3</number>
+             </property>
+             <property name="minimum">
+              <double>0.0</double>
+             </property>
+             <property name="maximum">
+              <double>10.0</double>
+             </property>
+             <property name="singleStep">
+              <double>0.01</double>
+             </property>
+             <property name="value">
+              <double>0.0</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Настройки Симуляции</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblSetpoint">
+             <property name="text">
+              <string>Уставка:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QDoubleSpinBox" name="spinSetpoint">
+             <property name="decimals">
+              <number>2</number>
+             </property>
+             <property name="minimum">
+              <double>-1000.0</double>
+             </property>
+             <property name="maximum">
+              <double>1000.0</double>
+             </property>
+             <property name="value">
+              <double>50.0</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblSampleTime">
+             <property name="text">
+              <string>Время дискретизации:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="spinSampleTime">
+             <property name="decimals">
+              <number>3</number>
+             </property>
+             <property name="minimum">
+              <double>0.001</double>
+             </property>
+             <property name="maximum">
+              <double>10.0</double>
+             </property>
+             <property name="singleStep">
+              <double>0.01</double>
+             </property>
+             <property name="value">
+              <double>0.1</double>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lblSimSteps">
+             <property name="text">
+              <string>Шагов симуляции:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="spinSimSteps">
+             <property name="minimum">
+              <number>100</number>
+             </property>
+             <property name="maximum">
+              <number>10000</number>
+             </property>
+             <property name="value">
+              <number>500</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="lblOutputMin">
+             <property name="text">
+              <string>Мин. выход:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="spinOutputMin">
+             <property name="minimum">
+              <double>-100.0</double>
+             </property>
+             <property name="maximum">
+              <double>100.0</double>
+             </property>
+             <property name="value">
+              <double>0.0</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="lblOutputMax">
+             <property name="text">
+              <string>Макс. выход:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QDoubleSpinBox" name="spinOutputMax">
+             <property name="minimum">
+              <double>-100.0</double>
+             </property>
+             <property name="maximum">
+              <double>200.0</double>
+             </property>
+             <property name="value">
+              <double>100.0</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabTuning">
+       <attribute name="title">
+        <string>⚙️ Настройка ПИД</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Метод Настройки</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QLabel" name="lblMethod">
+             <property name="text">
+              <string>Выберите метод:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cmbMethod">
+             <item>
+              <property name="text">
+               <string>Ziegler-Nichols (Циглер-Никольс)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Cohen-Coon (Коэн-Кун)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>IMC (Внутренняя Модель)</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTextBrowser" name="txtMethodDescription">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>100</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnTune">
+             <property name="text">
+              <string>🔧 Рассчитать Настройку</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Результаты Настройки</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout_3">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblKp">
+             <property name="text">
+              <string>Kp:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="editKp">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblKi">
+             <property name="text">
+              <string>Ki:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="editKi">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lblKd">
+             <property name="text">
+              <string>Kd:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="editKd">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="lblTi">
+             <property name="text">
+              <string>Ti:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="editTi">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="lblTd">
+             <property name="text">
+              <string>Td:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="editTd">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="lblOvershoot">
+             <property name="text">
+              <string>Перерегулирование:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLineEdit" name="editOvershoot">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="lblSettlingTime">
+             <property name="text">
+              <string>Время успокоения:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QLineEdit" name="editSettlingTime">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QTextEdit" name="txtRecommendations">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="placeholderText">
+              <string>Рекомендации появятся здесь...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0" colspan="2">
+            <widget class="QPushButton" name="btnApplySettings">
+             <property name="text">
+              <string>✅ Применить Настройки</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabSimulation">
+       <attribute name="title">
+        <string>📈 Симуляция и Графики</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="btnSimulate">
+            <property name="text">
+             <string>▶️ Запустить Симуляцию</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnReset">
+            <property name="text">
+             <string>🔄 Сброс</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblStatus">
+            <property name="text">
+             <string>Статус: Готов</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QGraphicsView" name="processChartView"/>
+         </item>
+         <item>
+          <widget class="QGraphicsView" name="controlChartView"/>
+         </item>
+        </layout>
+      </widget>
+      <widget class="QWidget" name="tabExport">
+       <attribute name="title">
+        <string>💾 Экспорт/Импорт</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="title">
+           <string>Экспорт Данных</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QPushButton" name="btnExport">
+             <property name="text">
+              <string>📤 Экспорт в CSV</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnExportJSON">
+             <property name="text">
+              <string>📤 Экспорт в JSON</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnExportReport">
+             <property name="text">
+              <string>📄 Отчет PDF</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="title">
+           <string>Импорт Данных</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QPushButton" name="btnImport">
+             <property name="text">
+              <string>📥 Импорт Конфигурации</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnImportData">
+             <property name="text">
+              <string>📥 Импорт Данных</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1400</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Справка</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNew">
+   <property name="text">
+    <string>Новый проект</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Открыть...</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

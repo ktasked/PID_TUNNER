@@ -1,0 +1,36 @@
+```
+# Build artifacts
+build/
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.o
+*.a
+*.so
+*.exe
+*.dll
+
+# Qt specific
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.pro.user
+*.qm
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+```
