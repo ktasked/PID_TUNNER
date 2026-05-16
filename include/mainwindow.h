@@ -2,11 +2,21 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
+#include <QVector>
+#include <QPointF>
 #include <memory>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+// Forward declarations для QtCharts - в пространстве имен QtCharts
+namespace QtCharts {
+    class QChartView;
+    class QLineSeries;
+    class QValueAxis;
+}
 
 class PIDController;
 class ProcessModel;
@@ -57,6 +67,7 @@ private slots:
 private:
     // Инициализация
     void setupUI();
+    void setupCharts();
     void setupConnections();
     void loadDefaultSettings();
     
@@ -78,6 +89,20 @@ private:
     // Основные компоненты
     std::unique_ptr<PIDController> m_pidController;
     std::unique_ptr<ProcessModel> m_processModel;
+    
+    // Компоненты графиков
+    QtCharts::QChartView *m_processChart;
+    QtCharts::QChartView *m_controlChart;
+    QtCharts::QLineSeries *m_processValueSeries;
+    QtCharts::QLineSeries *m_setpointSeries;
+    QtCharts::QLineSeries *m_controllerOutputSeries;
+    QtCharts::QValueAxis *m_axisX;
+    QtCharts::QValueAxis *m_axisY;
+    
+    // Данные для графиков
+    QVector<QPointF> m_processData;
+    QVector<QPointF> m_setpointData;
+    QVector<QPointF> m_outputData;
     
     // Таймер симуляции
     QTimer *m_simulationTimer;

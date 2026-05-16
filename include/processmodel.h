@@ -154,6 +154,7 @@ private:
     
     bool m_saturated = false;
     bool m_stable = true;
+    int m_stableCounter = 0;
     
     QDateTime m_simulationStartTime;
     double m_simulationTime = 0.0;
