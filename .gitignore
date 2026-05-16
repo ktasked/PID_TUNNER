@@ -1,36 +1,42 @@
 ```
 # Build artifacts
 build/
-CMakeFiles/
-cmake_install.cmake
-Makefile
+dist/
 *.o
+*.obj
 *.a
 *.so
-*.exe
 *.dll
+*.exe
+*.out
 
-# Qt specific
-moc_*.cpp
-moc_*.h
-qrc_*.cpp
-ui_*.h
-*.pro.user
-*.qm
+# Dependencies
+venv/
+.venv/
+__pycache__/
+*.egg-info/
 
-# IDE
+# IDE and editor files
 .vscode/
 .idea/
+*.swp
+*.swo
+*.tmp
+
+# System files
+.DS_Store
+Thumbs.db
 
 # Logs
 *.log
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
 
 # Environment
 .env
 .env.local
 *.env.*
-
-# OS
-.DS_Store
-Thumbs.db
 ```

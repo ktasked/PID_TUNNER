@@ -2,9 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QChartView>
-#include <QLineSeries>
-#include <QValueAxis>
 #include <memory>
 
 QT_BEGIN_NAMESPACE
@@ -14,9 +11,6 @@ QT_END_NAMESPACE
 class PIDController;
 class ProcessModel;
 class TuningMethod;
-class DataVisualizer;
-class ExportManager;
-class AdaptiveScheduler;
 
 /**
  * @brief Главное окно приложения автоматической настройки ПИД-регулятора
@@ -64,7 +58,6 @@ private:
     // Инициализация
     void setupUI();
     void setupConnections();
-    void setupCharts();
     void loadDefaultSettings();
     
     // Обновление интерфейса
@@ -85,23 +78,6 @@ private:
     // Основные компоненты
     std::unique_ptr<PIDController> m_pidController;
     std::unique_ptr<ProcessModel> m_processModel;
-    std::unique_ptr<DataVisualizer> m_visualizer;
-    std::unique_ptr<ExportManager> m_exportManager;
-    std::unique_ptr<AdaptiveScheduler> m_scheduler;
-    
-    // Графики
-    QChartView *m_processChart;
-    QChartView *m_controlChart;
-    QLineSeries *m_processValueSeries;
-    QLineSeries *m_setpointSeries;
-    QLineSeries *m_controllerOutputSeries;
-    QValueAxis *m_axisX;
-    QValueAxis *m_axisY;
-    
-    // Данные для графиков
-    QVector<QPointF> m_processData;
-    QVector<QPointF> m_setpointData;
-    QVector<QPointF> m_outputData;
     
     // Таймер симуляции
     QTimer *m_simulationTimer;

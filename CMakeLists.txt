@@ -7,39 +7,31 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets Charts Core)
+find_package(Qt5 REQUIRED COMPONENTS Widgets Core)
 
 set(SOURCES
     src/main.cpp
     src/mainwindow.cpp
     src/pidcontroller.cpp
-    src/pidtuner.cpp
     src/processmodel.cpp
     src/tuningmethod.cpp
     src/zeiglernichols.cpp
     src/cohencoon.cpp
     src/internalmodelcontrol.cpp
-    src/datavisualizer.cpp
-    src/exportmanager.cpp
-    src/adaptivescheduler.cpp
 )
 
 set(HEADERS
     include/mainwindow.h
     include/pidcontroller.h
-    include/pidtuner.h
     include/processmodel.h
     include/tuningmethod.h
     include/zeiglernichols.h
     include/cohencoon.h
     include/internalmodelcontrol.h
-    include/datavisualizer.h
-    include/exportmanager.h
-    include/adaptivescheduler.h
 )
 
 set(UI_FILES
-    ui/mainwindow.ui
+    src/mainwindow.ui
 )
 
 set(RESOURCE_FILES
@@ -59,9 +51,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    Qt6::Widgets
-    Qt6::Charts
-    Qt6::Core
+    Qt5::Widgets
+    Qt5::Core
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
