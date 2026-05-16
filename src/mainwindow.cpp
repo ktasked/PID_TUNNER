@@ -187,6 +187,19 @@ void MainWindow::setupConnections()
             this, [this]() { updateProcessParams(); });
     connect(ui->spinDeadTime, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
             this, [this]() { updateProcessParams(); });
+    
+    // Соединения сигналов от PID контроллера и модели процесса
+    if (m_pidController) {
+        connect(m_pidController.get(), &PIDController::setpointChanged,
+                this, &MainWindow::onSetpointChanged);
+        connect(m_pidController.get(), &PIDController::outputChanged,
+                this, &MainWindow::onControllerOutputChanged);
+    }
+    
+    if (m_processModel) {
+        connect(m_processModel.get(), &ProcessModel::processValueChanged,
+                this, &MainWindow::onProcessValueChanged);
+    }
 }
 
 void MainWindow::loadDefaultSettings()

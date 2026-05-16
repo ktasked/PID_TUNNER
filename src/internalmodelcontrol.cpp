@@ -51,7 +51,7 @@ double InternalModelControl::calculateOptimalTau(const ProcessModel::ModelParame
     return tau_base * correctionFactor;
 }
 
-TuningResult InternalModelControl::tune(const ProcessModel::ModelParameters& params)
+TuningMethod::TuningResult InternalModelControl::tune(const ProcessModel::ModelParameters& params)
 {
     double tau = m_tau_cl;
     
@@ -68,9 +68,9 @@ TuningResult InternalModelControl::tune(const ProcessModel::ModelParameters& par
     }
 }
 
-TuningResult InternalModelControl::tuneStandardIMC(const ProcessModel::ModelParameters& params, double tau)
+TuningMethod::TuningResult InternalModelControl::tuneStandardIMC(const ProcessModel::ModelParameters& params, double tau)
 {
-    TuningResult result;
+    TuningMethod::TuningResult result;
     
     double K = params.gain;
     double T = params.timeConstant1;
@@ -119,9 +119,9 @@ TuningResult InternalModelControl::tuneStandardIMC(const ProcessModel::ModelPara
     return result;
 }
 
-TuningResult InternalModelControl::tuneIMCwithFilter(const ProcessModel::ModelParameters& params, double tau)
+TuningMethod::TuningResult InternalModelControl::tuneIMCwithFilter(const ProcessModel::ModelParameters& params, double tau)
 {
-    TuningResult result = tuneStandardIMC(params, tau);
+    TuningMethod::TuningResult result = tuneStandardIMC(params, tau);
     
     // Добавление фильтра для шумных процессов
     double filterAlpha = 0.1;  // Коэффициент фильтра
