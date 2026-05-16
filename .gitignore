@@ -1,75 +1,55 @@
-# CMake build artifacts
-CMakeFiles/
-cmake_install.cmake
-CMakeCache.txt
-Makefile
-compile_commands.json
+```
+# Compiled and build artifacts
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
+
+# Dependencies
+venv/
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+node_modules/
 
 # Build directories
 build/
 dist/
 target/
+.gradle/
 
-# Dependencies
-node_modules/
-vendor/
-
-# IDE files
+# Editors
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Logs
+# Logs and temp files
 *.log
+*.tmp
 
 # Environment
 .env
 .env.local
 *.env.*
 
+# System files
+.DS_Store
+Thumbs.db
+
 # Coverage
 coverage/
 htmlcov/
 .coverage
 
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.gcda
-*.gcno
-*.gcov
-*.profdata
-*.profraw
-
-# Compiled and binary files
-*.o
-*.obj
-*.out
-*.exe
-*.dll
-*.so
-*.a
-*.class
-*.jar
-*.war
+# Compressed files
 *.zip
-*.tar
 *.gz
+*.tar
 *.tgz
 *.bz2
 *.xz
@@ -85,78 +65,8 @@ coverage.xml
 *.Z
 *.lz
 *.lzo
-
-# System files
-.DS_Store
-Thumbs.db
-*.tmp
-
-# MyPy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pytest
-.pytest_cache/
-
-# Gradle
-.gradle/
-!gradle-wrapper.properties
-
-# Java
-*.class
-*.jar
-*.war
-*.ear
-*.nar
-*.hprof
-.hprof
-.dump
-*.dump
-*.pid
-*.ser
-*.idx
-*.log
-*.trace
-*.trc
-*.bak
-*.backup
-*.swp
-*.swo
-*~
-.\#
-\#*\#
-*.rej
-*.orig
-*.tmp
-*.temp
-*.backup
-*.bak
-*.save
-*.swp
-*.swo
-*~
-.\#
-\#*\#
-*.rej
-*.orig
-*.tmp
-*.temp
-*.backup
-*.bak
-*.save
-*.swp
-*.swo
-*~
-.\#
-\#*\#
-*.rej
-*.orig
-*.tmp
-*.temp
-*.backup
-*.bak
-*.save
-*.swp
-*.swo
-*~
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
+```

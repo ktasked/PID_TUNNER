@@ -112,6 +112,16 @@ void PIDController::setDerivativeFilterTimeConstant(double tau)
     m_derivativeFilterTau = tau;
 }
 
+void PIDController::setSampleTime(double sampleTime)
+{
+    if (sampleTime <= 0) {
+        qWarning() << "Sample time must be positive";
+        return;
+    }
+    
+    m_sampleTime = sampleTime;
+}
+
 double PIDController::compute(double processVariable, double timestamp)
 {
     // Определение времени дискретизации

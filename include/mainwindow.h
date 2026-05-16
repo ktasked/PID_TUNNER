@@ -19,9 +19,9 @@ namespace QtCharts {
     class QValueAxis;
 }
 
-class PIDController;  // Forward declaration
-class ProcessModel;   // Forward declaration
-class TuningMethod;   // Forward declaration
+#include "pidcontroller.h"
+#include "processmodel.h"
+#include "tuningmethod.h"
 
 /**
  * @brief Главное окно приложения автоматической настройки ПИД-регулятора

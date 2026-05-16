@@ -44,9 +44,9 @@ double CohenCoon::calculateCorrectionFactor(double ratio) const
     return baseFactor;
 }
 
-TuningResult CohenCoon::tune(const ProcessModel::ModelParameters& params)
+TuningMethod::TuningResult CohenCoon::tune(const ProcessModel::ModelParameters& params)
 {
-    TuningResult result;
+    TuningMethod::TuningResult result;
     
     double K = params.gain;
     double T = params.timeConstant1;

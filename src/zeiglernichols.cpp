@@ -106,9 +106,9 @@ TuningMethod::TuningResult ZieglerNichols::tuneByReactionCurve(const ProcessMode
     return result;
 }
 
-TuningResult ZieglerNichols::tuneByUltimateGain()
+TuningMethod::TuningResult ZieglerNichols::tuneByUltimateGain()
 {
-    TuningResult result;
+    TuningMethod::TuningResult result;
     
     if (m_Ku <= 0 || m_Pu <= 0) {
         result.isValid = false;
