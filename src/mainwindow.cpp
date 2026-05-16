@@ -21,6 +21,8 @@
 #include <QtCharts/QValueAxis>
 #include <QtCharts/QScatterSeries>
 
+QT_CHARTS_USE_NAMESPACE
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -29,6 +31,13 @@ MainWindow::MainWindow(QWidget *parent)
     , m_simulationTimer(new QTimer(this))
     , m_simulationStep(0)
     , m_isSimulating(false)
+    , m_processChart(nullptr)
+    , m_controlChart(nullptr)
+    , m_processValueSeries(nullptr)
+    , m_setpointSeries(nullptr)
+    , m_controllerOutputSeries(nullptr)
+    , m_axisX(nullptr)
+    , m_axisY(nullptr)
 {
     ui->setupUi(this);
     
@@ -45,12 +54,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupUI()
 {
-    // Инициализация графиков
-    m_processChart = new QChartView(ui->processChartView);
-    m_controlChart = new QChartView(ui->controlChartView);
-    
-    ui->processChartView->setScene(m_processChart->scene());
-    ui->controlChartView->setScene(m_controlChart->scene());
+    // Инициализация графиков будет выполнена в setupCharts()
     
     // Обновление описания метода
     onMethodComboBox_currentIndexChanged(ui->cmbMethod->currentIndex());
@@ -93,7 +97,6 @@ void MainWindow::setupCharts()
     processChart->legend()->setVisible(true);
     processChart->legend()->setAlignment(Qt::AlignBottom);
     
-    m_processChart->setChart(processChart);
     ui->processChartView->setChart(processChart);
     
     // График управления
@@ -124,7 +127,6 @@ void MainWindow::setupCharts()
     controlChart->legend()->setVisible(true);
     controlChart->legend()->setAlignment(Qt::AlignBottom);
     
-    m_controlChart->setChart(controlChart);
     ui->controlChartView->setChart(controlChart);
 }
 

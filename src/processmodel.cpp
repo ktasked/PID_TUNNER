@@ -301,13 +301,12 @@ void ProcessModel::updateStatistics()
     if (m_settlingTime <= 0) {
         double tolerance = 0.02 * qAbs(targetValue);
         if (qAbs(m_processValue - targetValue) <= tolerance) {
-            static int stableCount = 0;
-            stableCount++;
-            if (stableCount > 10) { // 10 последовательных шагов в полосе
+            m_stableCounter++;
+            if (m_stableCounter > 10) { // 10 последовательных шагов в полосе
                 m_settlingTime = m_simulationTime - m_startTime;
             }
         } else {
-            stableCount = 0;
+            m_stableCounter = 0;
         }
     }
     

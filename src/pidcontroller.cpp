@@ -267,15 +267,15 @@ void PIDController::applyAntiWindup(double rawOutput, double dt)
             m_output = rawOutput;
             bool integrate = true;
             
-            if (rawOutput >= m_outputMax && error > 0) {
+            if (rawOutput >= m_outputMax && m_currentError > 0) {
                 integrate = false;
-            } else if (rawOutput <= m_outputMin && error < 0) {
+            } else if (rawOutput <= m_outputMin && m_currentError < 0) {
                 integrate = false;
             }
             
             if (!integrate) {
                 // Отменяем последнее интегрирование
-                double integralIncrement = (error + m_previousError) * dt / 2.0;
+                double integralIncrement = (m_currentError + m_previousError) * dt / 2.0;
                 m_integralTerm -= m_ki * integralIncrement;
             }
         }
@@ -283,7 +283,7 @@ void PIDController::applyAntiWindup(double rawOutput, double dt)
         
     case AntiWindupMethod::Adaptive:
         // Патентоспособный адаптивный метод
-        applyAdaptiveAntiWindup(rawOutput, error, dt);
+        applyAdaptiveAntiWindup(rawOutput, m_currentError, dt);
         break;
     }
 }
