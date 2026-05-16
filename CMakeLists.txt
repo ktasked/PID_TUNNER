@@ -76,7 +76,6 @@ else()
 endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
-    QT_CHARTS_USE_NAMESPACE
     APP_VERSION="${PROJECT_VERSION}"
 )
 

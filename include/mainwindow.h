@@ -11,17 +11,15 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-// Forward declarations для QtCharts - в пространстве имен QtCharts
-namespace QtCharts {
-    class QChart;
-    class QChartView;
-    class QLineSeries;
-    class QValueAxis;
-}
-
 #include "pidcontroller.h"
 #include "processmodel.h"
 #include "tuningmethod.h"
+
+// Подключаем заголовки QtCharts
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QValueAxis>
 
 /**
  * @brief Главное окно приложения автоматической настройки ПИД-регулятора
@@ -92,15 +90,15 @@ private:
     std::unique_ptr<ProcessModel> m_processModel;
     
     // Компоненты графиков
-    QtCharts::QChart *m_processChart;
-    QtCharts::QChart *m_controlChart;
-    QtCharts::QChartView *m_processChartView;
-    QtCharts::QChartView *m_controlChartView;
-    QtCharts::QLineSeries *m_processValueSeries;
-    QtCharts::QLineSeries *m_setpointSeries;
-    QtCharts::QLineSeries *m_controllerOutputSeries;
-    QtCharts::QValueAxis *m_axisX;
-    QtCharts::QValueAxis *m_axisY;
+    QChart *m_processChart;
+    QChart *m_controlChart;
+    QChartView *m_processChartView;
+    QChartView *m_controlChartView;
+    QLineSeries *m_processValueSeries;
+    QLineSeries *m_setpointSeries;
+    QLineSeries *m_controllerOutputSeries;
+    QValueAxis *m_axisX;
+    QValueAxis *m_axisY;
     
     // Данные для графиков
     QVector<QPointF> m_processData;

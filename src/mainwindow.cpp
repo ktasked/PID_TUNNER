@@ -21,8 +21,6 @@
 #include <QtCharts/QValueAxis>
 #include <QtCharts/QScatterSeries>
 
-QT_CHARTS_USE_NAMESPACE
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
