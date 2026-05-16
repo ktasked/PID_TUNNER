@@ -13,6 +13,7 @@ QT_END_NAMESPACE
 
 // Forward declarations для QtCharts - в пространстве имен QtCharts
 namespace QtCharts {
+    class QChart;
     class QChartView;
     class QLineSeries;
     class QValueAxis;
@@ -91,8 +92,10 @@ private:
     std::unique_ptr<ProcessModel> m_processModel;
     
     // Компоненты графиков
-    QtCharts::QChartView *m_processChart;
-    QtCharts::QChartView *m_controlChart;
+    QtCharts::QChart *m_processChart;
+    QtCharts::QChart *m_controlChart;
+    QtCharts::QChartView *m_processChartView;
+    QtCharts::QChartView *m_controlChartView;
     QtCharts::QLineSeries *m_processValueSeries;
     QtCharts::QLineSeries *m_setpointSeries;
     QtCharts::QLineSeries *m_controllerOutputSeries;
