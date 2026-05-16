@@ -619,3 +619,23 @@ void MainWindow::loadConfiguration()
 {
     // Загрузка конфигурации (вызывается из on_btnImport_clicked)
 }
+
+void MainWindow::onProcessValueChanged(double value)
+{
+    // Обработка изменения значения процесса
+    // Может использоваться для обновления UI или логирования
+    Q_UNUSED(value);
+}
+
+void MainWindow::onSetpointChanged(double value)
+{
+    // Обработка изменения уставки
+    ui->spinSetpoint->setValue(value);
+}
+
+void MainWindow::onControllerOutputChanged(double output)
+{
+    // Обработка изменения управляющего воздействия
+    // Может использоваться для обновления UI или логирования
+    Q_UNUSED(output);
+}

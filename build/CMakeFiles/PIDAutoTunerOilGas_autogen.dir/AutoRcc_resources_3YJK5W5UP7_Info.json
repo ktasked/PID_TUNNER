@@ -1,0 +1,19 @@
+{
+	"BUILD_DIR" : "/workspace/build/PIDAutoTunerOilGas_autogen",
+	"CMAKE_BINARY_DIR" : "/workspace/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/workspace/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/workspace",
+	"CMAKE_SOURCE_DIR" : "/workspace",
+	"INCLUDE_DIR" : "/workspace/build/PIDAutoTunerOilGas_autogen/include",
+	"INPUTS" : [ "/workspace/resources/styles/app.qss" ],
+	"LOCK_FILE" : "/workspace/build/CMakeFiles/PIDAutoTunerOilGas_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "3YJK5W5UP7",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "/usr/lib/qt6/libexec/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/workspace/build/CMakeFiles/PIDAutoTunerOilGas_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Used.txt",
+	"SOURCE" : "/workspace/resources/resources.qrc",
+	"VERBOSITY" : 0
+}
